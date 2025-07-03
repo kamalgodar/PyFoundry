@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Dynaconf &#8212; pyfoundry 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=2709fde1"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="dynaconf">
+<h1>Dynaconf<a class="headerlink" href="#dynaconf" title="Link to this heading">¶</a></h1>
+<p>Dynaconf is a powerful and flexible configuration management tool for Python that simplifies how you handle settings and secrets across multiple environments (dev, staging, production, etc.).
+Why Use Dynaconf?
+—————–</p>
+<p>It solves common problems like:</p>
+<ul class="simple">
+<li><p>Overriding configs based on environment</p></li>
+<li><p>Keeping secrets out of source code</p></li>
+<li><p>Loading settings from multiple sources (files, env vars, Redis, Vault, etc.)</p></li>
+<li><p>Using default values + overrides cleanly</p></li>
+</ul>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Inspired by the <a class="reference external" href="https://12factor.net/config">12-factor application guide</a></p></li>
+<li><p><strong>Settings management</strong> (default values, validation, parsing, templating)</p></li>
+<li><p>Protection of <strong>sensitive information</strong> (passwords/tokens)</p></li>
+<li><p>Multiple <strong>file formats</strong> <code class="docutils literal notranslate"><span class="pre">toml|yaml|json|ini|py</span></code> and also customizable loaders.</p></li>
+<li><p>Full support for <strong>environment variables</strong> to override existing settings (dotenv
+support included).</p></li>
+<li><p>Optional layered system for <strong>multi environments</strong> <code class="docutils literal notranslate"><span class="pre">[default,</span> <span class="pre">development,</span> <span class="pre">testing,</span>
+<span class="pre">production]</span></code> (also called multi profiles)</p></li>
+<li><p>Built-in support for <strong>Hashicorp Vault</strong> and <strong>Redis</strong> as settings and secrets
+storage.</p></li>
+<li><p>Built-in extensions for <strong>Django</strong> and <strong>Flask</strong> web frameworks.</p></li>
+<li><p><strong>CLI</strong> for common operations such as <code class="docutils literal notranslate"><span class="pre">init,</span> <span class="pre">list,</span> <span class="pre">write,</span> <span class="pre">validate,</span> <span class="pre">export</span></code>.</p></li>
+<li><dl class="simple">
+<dt>Layered configuration</dt><dd><ul>
+<li><p>it loads and merges settings from multiple sources in a prioritized, layered order. Each “layer” can override the values from the previous one — giving you a flexible, environment-aware, and override-friendly configuration setup.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>add<span class="w"> </span>dynaconf
+</pre></div>
+</div>
+</section>
+<section id="code-setup">
+<h2>Code setup<a class="headerlink" href="#code-setup" title="Link to this heading">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dynaconf</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dynaconf</span>
+
+<span class="n">settings</span> <span class="o">=</span> <span class="n">Dynaconf</span><span class="p">(</span>
+    <span class="n">environments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">envvar_prefix</span><span class="o">=</span><span class="s2">&quot;DYNACONF&quot;</span><span class="p">,</span>
+    <span class="n">load_dotenv</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">settings_files</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;settings.toml&#39;</span><span class="p">,</span> <span class="s2">&quot;secrets/.secrets.toml&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<section id="environments-parameter">
+<h3>environments parameter:<a class="headerlink" href="#environments-parameter" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">environments</span><span class="o">=</span><span class="kc">True</span>  <span class="c1"># enables [dev], [stage], [prod]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>You have to specify the environment with the below environment variable.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">ENV_FOR_DYNACONF</span><span class="o">=</span>dev
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$ENV_FOR_DYNACONF</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Default is loaded always first, whichever the environment is selected.</p></li>
+<li><p>Then, if the environment is set, default is loaded and then the selected environment is loaded.</p></li>
+<li><p>If export ENV_FOR_DYNACONF=prod, then Dynaconf will load [default] and then override with [prod].</p></li>
+</ul>
+</section>
+<section id="settings-files-parameter">
+<h3>settings_files parameter:<a class="headerlink" href="#settings-files-parameter" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">settings_files</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;settings.toml&#39;</span><span class="p">,</span> <span class="s2">&quot;secrets/.secrets.toml&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The settings_files argument tells Dynaconf which configuration files to load, in order of priority.</p></li>
+<li><p>Values in .secrets.toml will override values in settings.toml if keys conflict.</p></li>
+<li><dl class="simple">
+<dt>If we set ENV_FOR_DYNACONF=prod, Dynaconf will look for:</dt><dd><ul>
+<li><p>[default] section in both files</p></li>
+<li><p>[prod] section in both files</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="envvar-prefix-parameter">
+<h3>envvar_prefix parameter:<a class="headerlink" href="#envvar-prefix-parameter" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>It defines a prefix that Dynaconf uses when looking up environment variables to override your settings.</p></li>
+<li><p>When envvar_prefix=”DYNACONF” is set, Dynaconf will look for environment variables that start with <a class="reference internal" href="#dynaconf">DYNACONF</a>.</p></li>
+<li><p>Dynaconf accesses os.environ at runtime to override our settings.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">settings</span> <span class="o">=</span> <span class="n">Dynaconf</span><span class="p">(</span><span class="n">envvar_prefix</span><span class="o">=</span><span class="s2">&quot;MYAPP&quot;</span><span class="p">)</span>  <span class="c1"># We can change it as well, if we want a project-specific prefix.</span>
+</pre></div>
+</div>
+<p>Suppose we have this setting in our settings.toml.</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[default]</span>
+<span class="n">app_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;MyApp&quot;</span>
+<span class="n">db_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;sqlite:///local.db&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">DYNACONF_DEBUG</span><span class="o">=</span><span class="nb">true</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">DYNACONF_DB_URL</span><span class="o">=</span><span class="s2">&quot;postgresql://user:pass@host:5432/db&quot;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Then Dynaconf will override the values from settings.toml using the values from the environment, because the keys match (DEBUG, DB_URL) and are prefixed with <a class="reference internal" href="#dynaconf">DYNACONF</a>.</p></li>
+</ul>
+</section>
+<section id="load-dotenv-parameter">
+<h3>load_dotenv parameter:<a class="headerlink" href="#load-dotenv-parameter" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">load_dotenv</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>This loads .env into os.environ at runtime, so overrides work like they came from export.</p></li>
+<li><p>Otherwise, we would have to export to override the environment variable all the time and .env wouldn’t work as it wouldn’t load the variable in os.environ.</p></li>
+</ul>
+</section>
+</section>
+<section id="unset-environment-variables">
+<h2>Unset environment variables<a class="headerlink" href="#unset-environment-variables" title="Link to this heading">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">unset</span><span class="w"> </span>ENV_FOR_DYNACONF
+<span class="nb">unset</span><span class="w"> </span>DYNACONF_DB_URL
+</pre></div>
+</div>
+</section>
+<section id="advanced-features">
+<h2>Advanced Features<a class="headerlink" href="#advanced-features" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Switch Work Environment</p></li>
+<li><p>CLI</p></li>
+</ul>
+<p>Update entry point scripts</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[project.scripts]</span>
+<span class="n">temp-convert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;src.temperature._cli:main&quot;</span>
+</pre></div>
+</div>
+<p>Install package</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Run command</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>temp-convert<span class="w"> </span>advance_temp<span class="w"> </span>convert<span class="w"> </span><span class="m">100</span><span class="w"> </span>F<span class="w"> </span>C
+</pre></div>
+</div>
+<p>Switch between environments</p>
+<ul class="simple">
+<li><p><strong>from_env</strong>: Creates a new settings instance pointing to defined env. Useful for accessing a limited number of config variables at once.</p></li>
+<li><p><strong>setenv</strong> (not recommended): Sets the existing instance to defined env. May cause issues since it’s not global.</p></li>
+<li><p><strong>using_env</strong>: Context manager for temporary environment switch.</p></li>
+</ul>
+</section>
+<section id="examples-switching-environments-in-code">
+<h2>Examples: Switching Environments in Code<a class="headerlink" href="#examples-switching-environments-in-code" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>from_env (Recommended)</strong></p></li>
+</ul>
+<p>Creates a <strong>new settings instance</strong> for the specified environment.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dynaconf</span><span class="w"> </span><span class="kn">import</span> <span class="n">settings</span>
+
+<span class="c1"># Create a new settings instance from &#39;prod&#39;</span>
+<span class="n">prod_settings</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">from_env</span><span class="p">(</span><span class="s2">&quot;prod&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">prod_settings</span><span class="o">.</span><span class="n">db_url</span><span class="p">)</span>      <span class="c1"># Outputs: postgresql://prod_user:prod_pass@prod_host:5432/prod_db</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prod_settings</span><span class="o">.</span><span class="n">app_name</span><span class="p">)</span>    <span class="c1"># Outputs: MyApp</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>setenv (Not Recommended)</strong></p></li>
+</ul>
+<p><strong>Mutates the global settings instance</strong> — use with caution.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dynaconf</span><span class="w"> </span><span class="kn">import</span> <span class="n">settings</span>
+
+<span class="c1"># Switch the current settings instance to &#39;prod&#39;</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setenv</span><span class="p">(</span><span class="s2">&quot;prod&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">db_url</span><span class="p">)</span>  <span class="c1"># Outputs: postgresql://prod_user:prod_pass@prod_host:5432/prod_db</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>using_env (Context Manager — Recommended)</strong></p></li>
+</ul>
+<p>Temporarily switches the environment for a block of code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dynaconf</span><span class="w"> </span><span class="kn">import</span> <span class="n">settings</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">db_url</span><span class="p">)</span>  <span class="c1"># Outputs: sqlite:///local.db (default)</span>
+
+<span class="k">with</span> <span class="n">settings</span><span class="o">.</span><span class="n">using_env</span><span class="p">(</span><span class="s2">&quot;prod&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">db_url</span><span class="p">)</span>  <span class="c1"># Outputs: postgresql://prod_user:prod_pass@prod_host:5432/prod_db</span>
+
+<span class="c1"># Back to original env</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">db_url</span><span class="p">)</span>  <span class="c1"># Outputs: sqlite:///local.db</span>
+</pre></div>
+</div>
+</section>
+<section id="uninstall">
+<h2>Uninstall<a class="headerlink" href="#uninstall" title="Link to this heading">¶</a></h2>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>uv<span class="w"> </span>remove<span class="w"> </span>dynaconf
+</pre></div>
+</div>
+</section>
+<section id="other-features">
+<h2>Other features<a class="headerlink" href="#other-features" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.dynaconf.com/secrets/">Secrets</a></p></li>
+<li><p><a class="reference external" href="https://www.dynaconf.com/merging/">Merging</a></p></li>
+<li><p><a class="reference external" href="https://www.dynaconf.com/dynamic/">Dynamic Variables</a></p></li>
+<li><p><a class="reference external" href="https://www.dynaconf.com/cli/">CLI</a></p></li>
+<li><p><a class="reference external" href="https://www.dynaconf.com/validation/">Validation</a></p></li>
+<li><p><a class="reference external" href="https://www.dynaconf.com/flask/">Flask</a></p></li>
+<li><p><a class="reference external" href="https://www.dynaconf.com/django/">Django</a></p></li>
+<li><p><a class="reference external" href="https://www.dynaconf.com/advanced/">Advanced usage</a></p></li>
+</ul>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">pyfoundry</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, fusemachines.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/setup/dynaconf.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

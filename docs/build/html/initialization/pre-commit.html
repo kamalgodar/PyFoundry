@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Pre-commit Integration &#8212; pyfoundry 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=2709fde1"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Type Hinting" href="mypy.html" />
+    <link rel="prev" title="Linter and Formatter" href="ruff.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="pre-commit-integration">
+<h1>Pre-commit Integration<a class="headerlink" href="#pre-commit-integration" title="Link to this heading">¶</a></h1>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p>
+<ul>
+<li><p><a class="reference internal" href="#why-use-pre-commit" id="id2">Why Use Pre-commit?</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#installation" id="id3">Installation</a></p></li>
+<li><p><a class="reference internal" href="#configuration" id="id4">Configuration</a></p></li>
+<li><p><a class="reference internal" href="#hook-categories" id="id5">Hook Categories</a></p>
+<ul>
+<li><p><a class="reference internal" href="#general-code-hygiene" id="id6">General Code Hygiene</a></p></li>
+<li><p><a class="reference internal" href="#syntax-and-format-validation" id="id7">Syntax and Format Validation</a></p></li>
+<li><p><a class="reference internal" href="#python-specific-quality" id="id8">Python-Specific Quality</a></p></li>
+<li><p><a class="reference internal" href="#git-and-commit-message-hooks" id="id9">Git and Commit Message Hooks</a></p></li>
+<li><p><a class="reference internal" href="#uv-lockfile-integrity" id="id10">UV Lockfile Integrity</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#usage" id="id11">Usage</a></p></li>
+<li><p><a class="reference internal" href="#maintenance-tips" id="id12">Maintenance Tips</a></p></li>
+<li><p><a class="reference internal" href="#best-practices" id="id13">Best Practices</a></p></li>
+<li><p><a class="reference internal" href="#troubleshooting" id="id14">Troubleshooting</a></p></li>
+<li><p><a class="reference internal" href="#conclusion" id="id15">Conclusion</a></p></li>
+</ul>
+</nav>
+<section id="introduction">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
+<p><strong>Pre-commit</strong> is a multi-language package manager for Git hooks. It ensures code quality by running defined checks automatically on every commit. This prevents issues like syntax errors, trailing whitespace, or incorrect commit messages from entering your repository.</p>
+<p>For full documentation, visit: <a class="reference external" href="https://pre-commit.com/">https://pre-commit.com/</a></p>
+<section id="why-use-pre-commit">
+<h3><a class="toc-backref" href="#id2" role="doc-backlink">Why Use Pre-commit?</a><a class="headerlink" href="#why-use-pre-commit" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Catches issues early (before CI/CD).</p></li>
+<li><p>Improves code consistency and quality.</p></li>
+<li><p>Reduces reviewer fatigue over trivial issues.</p></li>
+<li><p>Enforces standards across teams.</p></li>
+<li><p>Easy to configure and share.</p></li>
+</ul>
+</section>
+</section>
+<section id="installation">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Installation</a><a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>uv<span class="w"> </span>add<span class="w"> </span>--dev<span class="w"> </span>pre-commit
+<span class="gp">$ </span>pre-commit<span class="w"> </span>install
+</pre></div>
+</div>
+<p>This installs the Git hook scripts and sets up .git/hooks/pre-commit.</p>
+<p>Optional (Auto-enable for all repos):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>init.templateDir<span class="w"> </span>~/.git-template
+<span class="gp">$ </span>pre-commit<span class="w"> </span>init-templatedir<span class="w"> </span>~/.git-template
+</pre></div>
+</div>
+</section>
+<section id="configuration">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Configuration</a><a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h2>
+<p>Create a file named kamal in the root of your project. Here’s an example setup:</p>
+</section>
+<section id="hook-categories">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Hook Categories</a><a class="headerlink" href="#hook-categories" title="Link to this heading">¶</a></h2>
+<section id="general-code-hygiene">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">General Code Hygiene</a><a class="headerlink" href="#general-code-hygiene" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>check-added-large-files</strong>: Prevent committing files over 500 KB.</p></li>
+<li><p><strong>trailing-whitespace</strong>: Strips trailing spaces from lines (runs in pre-commit, pre-push, and manual stages).</p></li>
+<li><p><strong>end-of-file-fixer</strong>: Ensures files end with a newline (excludes Python files).</p></li>
+<li><p><strong>mixed-line-ending</strong>: Converts inconsistent line endings to LF.</p></li>
+<li><p><strong>detect-private-key</strong>: Warns if a private key is accidentally committed.</p></li>
+</ul>
+</section>
+<section id="syntax-and-format-validation">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Syntax and Format Validation</a><a class="headerlink" href="#syntax-and-format-validation" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>check-ast</strong>: Ensures Python code is valid syntax.</p></li>
+<li><p><strong>check-json</strong>, <strong>check-yaml</strong>, <strong>check-toml</strong>: Validates file syntax (YAML check runs with –unsafe flag).</p></li>
+<li><p><strong>check-case-conflict</strong>: Checks for filename conflicts on case-insensitive filesystems.</p></li>
+<li><p><strong>check-merge-conflict</strong>: Prevents merge conflict markers from being committed.</p></li>
+</ul>
+</section>
+<section id="python-specific-quality">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Python-Specific Quality</a><a class="headerlink" href="#python-specific-quality" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>ruff</strong>: Linting and static analysis with fixes enabled (targets Python 3.12, ignores E203).</p></li>
+<li><p><strong>ruff-format</strong>: Formats code to Python 3.12 standards.</p></li>
+<li><p><strong>mypy</strong>: Type-checks Python code with –disallow-untyped-defs (excludes docs directory).</p></li>
+<li><p><strong>add-trailing-comma</strong>: Adds trailing commas to Python collections (Python 3.6+ compatible).</p></li>
+<li><p><strong>debug-statements</strong>: Prevents committing Python breakpoint() or pdb calls.</p></li>
+<li><p><strong>pydoclint</strong>: Enforces Google-style docstrings with strict validation:
+- Checks argument order and type hints
+- Validates return and yield sections
+- Verifies class attributes documentation
+- Ensures style consistency</p></li>
+<li><p><strong>flake8</strong>: Additional docstring checks (Google style convention) focused on src/ directory.</p></li>
+</ul>
+</section>
+<section id="git-and-commit-message-hooks">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Git and Commit Message Hooks</a><a class="headerlink" href="#git-and-commit-message-hooks" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>no-commit-to-branch</strong>: Prevents commits to protected branches (main/master).</p></li>
+<li><p><strong>conventional-pre-commit</strong>: Strict validation of commit messages against Conventional Commits:
+- Enforces types: feat, fix, chore, refactor, docs, style, test, perf, ci, build, revert
+- Requires scope
+- Runs at commit-msg stage</p></li>
+</ul>
+</section>
+<section id="uv-lockfile-integrity">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">UV Lockfile Integrity</a><a class="headerlink" href="#uv-lockfile-integrity" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>uv-lock</strong>: Ensures uv-generated lockfiles are up-to-date and correct.</p></li>
+</ul>
+</section>
+</section>
+<section id="usage">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Usage</a><a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
+<p>Pre-commit hooks will run automatically on each git commit.</p>
+<p>To manually run all hooks:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pre-commit<span class="w"> </span>run<span class="w"> </span>--all-files
+</pre></div>
+</div>
+<p>To run on specific files:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pre-commit<span class="w"> </span>run<span class="w"> </span>--files<span class="w"> </span>path/to/file1.py<span class="w"> </span>path/to/file2.py
+</pre></div>
+</div>
+<p>To run a specific hook:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pre-commit<span class="w"> </span>run<span class="w"> </span>&lt;hook-id&gt;
+</pre></div>
+</div>
+<p>Example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pre-commit<span class="w"> </span>run<span class="w"> </span>ruff<span class="w"> </span>--all-files
+</pre></div>
+</div>
+<p>To skip hooks temporarily:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nv">SKIP</span><span class="o">=</span>ruff<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;chore: skip ruff temporarily&quot;</span>
+</pre></div>
+</div>
+<p>To update all hooks to latest compatible versions:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pre-commit<span class="w"> </span>autoupdate
+</pre></div>
+</div>
+</section>
+<section id="maintenance-tips">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">Maintenance Tips</a><a class="headerlink" href="#maintenance-tips" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Run pre-commit autoupdate regularly to keep hooks up-to-date.</p></li>
+<li><p>Review kamal and clean up unused hooks as needed.</p></li>
+<li><p>Some hooks (like trailing-whitespace) support multiple stages (pre-commit, pre-push, manual).</p></li>
+<li><p>For Python projects, maintain consistency between Ruff, mypy, and pydoclint configurations.</p></li>
+</ul>
+</section>
+<section id="best-practices">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">Best Practices</a><a class="headerlink" href="#best-practices" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Make pre-commit mandatory in team workflows (e.g., through CI).</p></li>
+<li><p>Never bypass conventional-pre-commit without valid reason.</p></li>
+<li><p>Combine with EditorConfig for consistent formatting.</p></li>
+<li><p>Use Ruff as the primary linter with mypy for type checking.</p></li>
+<li><p>Enforce comprehensive docstrings with pydoclint’s Google style checks.</p></li>
+<li><p>Ensure developers install hooks with pre-commit install after cloning.</p></li>
+</ul>
+</section>
+<section id="troubleshooting">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">Troubleshooting</a><a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Hook failed</strong>? Run with –all-files to debug.</p></li>
+<li><p><strong>Permissions error</strong>? Ensure Python and pre-commit are installed in your environment.</p></li>
+<li><p><strong>Hook not running</strong>? Confirm .git/hooks/pre-commit exists and is executable.</p></li>
+<li><p><strong>Need debugging info?</strong></p></li>
+</ul>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pre-commit<span class="w"> </span>run<span class="w"> </span>--all-files<span class="w"> </span>-v
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Docstring issues</strong>? Check both pydoclint and flake8-docstrings outputs.</p></li>
+<li><p><strong>Type checking errors</strong>? Verify mypy configuration matches project standards.</p></li>
+</ul>
+</section>
+<section id="conclusion">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">Conclusion</a><a class="headerlink" href="#conclusion" title="Link to this heading">¶</a></h2>
+<p>Pre-commit is a powerful automation tool that keeps your codebase clean and standardized. The current configuration provides:
+- Robust Python quality checks (Ruff, mypy, pydoclint)
+- Comprehensive docstring validation
+- Strict commit message conventions
+- File integrity and syntax verification
+By integrating these checks early in your development lifecycle, you ensure consistency and reduce code review burdens.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">pyfoundry</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">PyFoundry</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="initialization.html">Initialization Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="editorconfig.html">EditorConfig Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ruff.html">Linter and Formatter</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Pre-commit Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mypy.html">Type Hinting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/setup.html">Setup Guides</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="initialization.html">Initialization Guides</a><ul>
+      <li>Previous: <a href="ruff.html" title="previous chapter">Linter and Formatter</a></li>
+      <li>Next: <a href="mypy.html" title="next chapter">Type Hinting</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, fusemachines.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/initialization/pre-commit.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

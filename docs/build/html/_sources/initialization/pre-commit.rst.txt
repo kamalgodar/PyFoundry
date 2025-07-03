@@ -42,11 +42,11 @@ Optional (Auto-enable for all repos):
 Configuration
 =============
 
-Create a file named .pre-commit-config.yaml in the root of your project. Here's an example setup:
+Create a file named kamal in the root of your project. Here's an example setup:
 
-.. literalinclude:: ../.pre-commit-config.yaml
+.. literalinclude:: ../kamal
    :language: yaml
-   :caption: .pre-commit-config.yaml
+   :caption: kamal
 
 Hook Categories
 ===============
@@ -142,7 +142,7 @@ Maintenance Tips
 ================
 
 - Run pre-commit autoupdate regularly to keep hooks up-to-date.
-- Review .pre-commit-config.yaml and clean up unused hooks as needed.
+- Review kamal and clean up unused hooks as needed.
 - Some hooks (like trailing-whitespace) support multiple stages (pre-commit, pre-push, manual).
 - For Python projects, maintain consistency between Ruff, mypy, and pydoclint configurations.
 
