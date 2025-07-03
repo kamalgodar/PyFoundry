@@ -1,38 +1,106 @@
+
+
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<html lang="en" data-content_root="../">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dynaconf &mdash; pyfoundry 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
-    <title>Dynaconf &#8212; pyfoundry 0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
-    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
-    <script src="../_static/documentation_options.js?v=2709fde1"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-   
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  
+    <link rel="next" title="Testing: Coverage (CLI)" href="coverage.html" />
+    <link rel="prev" title="Setup Guides" href="setup.html" /> 
+</head>
 
-  
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
 
-  </head><body>
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
           
+          
+          <a href="../index.html" class="icon icon-home">
+            pyfoundry
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">PyFoundry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../initialization/initialization.html">Initialization Guides</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="setup.html">Setup Guides</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Dynaconf</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#code-setup">Code setup</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#environments-parameter">environments parameter:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#settings-files-parameter">settings_files parameter:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#envvar-prefix-parameter">envvar_prefix parameter:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#load-dotenv-parameter">load_dotenv parameter:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#unset-environment-variables">Unset environment variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#advanced-features">Advanced Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples-switching-environments-in-code">Examples: Switching Environments in Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uninstall">Uninstall</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#other-features">Other features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="coverage.html">Testing: Coverage (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fire.html">Command Line Interface: Fire</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html">Python Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pytest-cov.html">Testing: pytest-cov</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pytest.html">Testing with pytest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tox.html">Testing: tox</a></li>
+</ul>
+</li>
+</ul>
 
-          <div class="body" role="main">
-            
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pyfoundry</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="setup.html">Setup Guides</a></li>
+      <li class="breadcrumb-item active">Dynaconf</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/setup/dynaconf.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="dynaconf">
-<h1>Dynaconf<a class="headerlink" href="#dynaconf" title="Link to this heading">¶</a></h1>
+<h1>Dynaconf<a class="headerlink" href="#dynaconf" title="Link to this heading"></a></h1>
 <p>Dynaconf is a powerful and flexible configuration management tool for Python that simplifies how you handle settings and secrets across multiple environments (dev, staging, production, etc.).
 Why Use Dynaconf?
 —————–</p>
@@ -44,7 +112,7 @@ Why Use Dynaconf?
 <li><p>Using default values + overrides cleanly</p></li>
 </ul>
 <section id="features">
-<h2>Features<a class="headerlink" href="#features" title="Link to this heading">¶</a></h2>
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Inspired by the <a class="reference external" href="https://12factor.net/config">12-factor application guide</a></p></li>
 <li><p><strong>Settings management</strong> (default values, validation, parsing, templating)</p></li>
@@ -68,13 +136,13 @@ storage.</p></li>
 </ul>
 </section>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>uv<span class="w"> </span>add<span class="w"> </span>dynaconf
 </pre></div>
 </div>
 </section>
 <section id="code-setup">
-<h2>Code setup<a class="headerlink" href="#code-setup" title="Link to this heading">¶</a></h2>
+<h2>Code setup<a class="headerlink" href="#code-setup" title="Link to this heading"></a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dynaconf</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dynaconf</span>
 
 <span class="n">settings</span> <span class="o">=</span> <span class="n">Dynaconf</span><span class="p">(</span>
@@ -86,7 +154,7 @@ storage.</p></li>
 </pre></div>
 </div>
 <section id="environments-parameter">
-<h3>environments parameter:<a class="headerlink" href="#environments-parameter" title="Link to this heading">¶</a></h3>
+<h3>environments parameter:<a class="headerlink" href="#environments-parameter" title="Link to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">environments</span><span class="o">=</span><span class="kc">True</span>  <span class="c1"># enables [dev], [stage], [prod]</span>
 </pre></div>
 </div>
@@ -104,7 +172,7 @@ storage.</p></li>
 </ul>
 </section>
 <section id="settings-files-parameter">
-<h3>settings_files parameter:<a class="headerlink" href="#settings-files-parameter" title="Link to this heading">¶</a></h3>
+<h3>settings_files parameter:<a class="headerlink" href="#settings-files-parameter" title="Link to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">settings_files</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;settings.toml&#39;</span><span class="p">,</span> <span class="s2">&quot;secrets/.secrets.toml&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -122,7 +190,7 @@ storage.</p></li>
 </ul>
 </section>
 <section id="envvar-prefix-parameter">
-<h3>envvar_prefix parameter:<a class="headerlink" href="#envvar-prefix-parameter" title="Link to this heading">¶</a></h3>
+<h3>envvar_prefix parameter:<a class="headerlink" href="#envvar-prefix-parameter" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>It defines a prefix that Dynaconf uses when looking up environment variables to override your settings.</p></li>
 <li><p>When envvar_prefix=”DYNACONF” is set, Dynaconf will look for environment variables that start with <a class="reference internal" href="#dynaconf">DYNACONF</a>.</p></li>
@@ -146,7 +214,7 @@ storage.</p></li>
 </ul>
 </section>
 <section id="load-dotenv-parameter">
-<h3>load_dotenv parameter:<a class="headerlink" href="#load-dotenv-parameter" title="Link to this heading">¶</a></h3>
+<h3>load_dotenv parameter:<a class="headerlink" href="#load-dotenv-parameter" title="Link to this heading"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">load_dotenv</span> <span class="o">=</span> <span class="kc">True</span>
 </pre></div>
 </div>
@@ -157,14 +225,14 @@ storage.</p></li>
 </section>
 </section>
 <section id="unset-environment-variables">
-<h2>Unset environment variables<a class="headerlink" href="#unset-environment-variables" title="Link to this heading">¶</a></h2>
+<h2>Unset environment variables<a class="headerlink" href="#unset-environment-variables" title="Link to this heading"></a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">unset</span><span class="w"> </span>ENV_FOR_DYNACONF
 <span class="nb">unset</span><span class="w"> </span>DYNACONF_DB_URL
 </pre></div>
 </div>
 </section>
 <section id="advanced-features">
-<h2>Advanced Features<a class="headerlink" href="#advanced-features" title="Link to this heading">¶</a></h2>
+<h2>Advanced Features<a class="headerlink" href="#advanced-features" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Switch Work Environment</p></li>
 <li><p>CLI</p></li>
@@ -190,7 +258,7 @@ storage.</p></li>
 </ul>
 </section>
 <section id="examples-switching-environments-in-code">
-<h2>Examples: Switching Environments in Code<a class="headerlink" href="#examples-switching-environments-in-code" title="Link to this heading">¶</a></h2>
+<h2>Examples: Switching Environments in Code<a class="headerlink" href="#examples-switching-environments-in-code" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><strong>from_env (Recommended)</strong></p></li>
 </ul>
@@ -233,13 +301,13 @@ storage.</p></li>
 </div>
 </section>
 <section id="uninstall">
-<h2>Uninstall<a class="headerlink" href="#uninstall" title="Link to this heading">¶</a></h2>
+<h2>Uninstall<a class="headerlink" href="#uninstall" title="Link to this heading"></a></h2>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>uv<span class="w"> </span>remove<span class="w"> </span>dynaconf
 </pre></div>
 </div>
 </section>
 <section id="other-features">
-<h2>Other features<a class="headerlink" href="#other-features" title="Link to this heading">¶</a></h2>
+<h2>Other features<a class="headerlink" href="#other-features" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.dynaconf.com/secrets/">Secrets</a></p></li>
 <li><p><a class="reference external" href="https://www.dynaconf.com/merging/">Merging</a></p></li>
@@ -254,65 +322,34 @@ storage.</p></li>
 </section>
 
 
+           </div>
           </div>
-          
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="setup.html" class="btn btn-neutral float-left" title="Setup Guides" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="coverage.html" class="btn btn-neutral float-right" title="Testing: Coverage (CLI)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, fusemachines.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="Main">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">pyfoundry</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-
-<search id="searchbox" style="display: none" role="search">
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</search>
-<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-  </ul></li>
-</ul>
-</div>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &#169;2025, fusemachines.
-      
-      |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
-      
-      |
-      <a href="../_sources/setup/dynaconf.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>

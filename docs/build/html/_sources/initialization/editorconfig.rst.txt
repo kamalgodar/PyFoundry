@@ -1,6 +1,6 @@
-============
+============================
 EditorConfig Configuration
-============
+============================
 
 .. meta::
    :description: Guidelines for setting up consistent coding styles across editors and IDEs using EditorConfig.

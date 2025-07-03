@@ -1,42 +1,108 @@
+
+
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<html lang="en" data-content_root="../">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Testing with pytest &mdash; pyfoundry 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
-    <title>Testing with pytest &#8212; pyfoundry 0.1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
-    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=b08954a9" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
-    <script src="../_static/documentation_options.js?v=2709fde1"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-   
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  
+    <link rel="next" title="Testing: tox" href="tox.html" />
+    <link rel="prev" title="Testing: pytest-cov" href="pytest-cov.html" /> 
+</head>
 
-  
-  
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
 
-  </head><body>
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
           
+          
+          <a href="../index.html" class="icon icon-home">
+            pyfoundry
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../README.html">PyFoundry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../initialization/initialization.html">Initialization Guides</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="setup.html">Setup Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dynaconf.html">Dynaconf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coverage.html">Testing: Coverage (CLI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fire.html">Command Line Interface: Fire</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.html">Python Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pytest-cov.html">Testing: pytest-cov</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Testing with pytest</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#key-features">Key Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage-example">Usage Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fixtures">Fixtures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#markers">Markers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#common-cli-options">Common CLI Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#naming-conventions">Naming Conventions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-tests">Running Tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#integration-with-pre-commit">Integration with pre-commit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uninstallation">Uninstallation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tox.html">Testing: tox</a></li>
+</ul>
+</li>
+</ul>
 
-          <div class="body" role="main">
-            
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pyfoundry</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="setup.html">Setup Guides</a></li>
+      <li class="breadcrumb-item active">Testing with pytest</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/setup/pytest.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="testing-with-pytest">
-<h1>Testing with pytest<a class="headerlink" href="#testing-with-pytest" title="Link to this heading">¶</a></h1>
+<h1>Testing with pytest<a class="headerlink" href="#testing-with-pytest" title="Link to this heading"></a></h1>
 <p>The <strong>pytest</strong> framework simplifies writing small, readable tests and scales to support
 complex functional testing for applications and libraries.</p>
 <section id="key-features">
-<h2>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h2>
+<h2>Key Features<a class="headerlink" href="#key-features" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Detailed output for failing assert statements (no need to remember <code class="docutils literal notranslate"><span class="pre">self.assert*</span></code> methods)</p></li>
 <li><p>Auto-discovery of test modules and functions</p></li>
@@ -52,14 +118,14 @@ complex functional testing for applications and libraries.</p>
 </div>
 </section>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
 <p>Use <cite>uv</cite> to add <cite>pytest</cite> as a development dependency:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>uv<span class="w"> </span>add<span class="w"> </span>--dev<span class="w"> </span>pytest
 </pre></div>
 </div>
 </section>
 <section id="configuration">
-<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h2>
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
 <p>Add the following section to your <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>:</p>
 <div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[tool.pytest.ini_options]</span>
 <span class="n">testpaths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;tests&quot;</span><span class="p">]</span>
@@ -68,7 +134,7 @@ complex functional testing for applications and libraries.</p>
 <p>This tells pytest to look for tests in the <code class="docutils literal notranslate"><span class="pre">tests/</span></code> directory.</p>
 </section>
 <section id="usage-example">
-<h2>Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading">¶</a></h2>
+<h2>Usage Example<a class="headerlink" href="#usage-example" title="Link to this heading"></a></h2>
 <p>Let’s write tests for two simple temperature conversion functions:
 <code class="docutils literal notranslate"><span class="pre">celsius_to_fahrenheit</span></code> and <code class="docutils literal notranslate"><span class="pre">fahrenheit_to_celsius</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
@@ -105,7 +171,7 @@ complex functional testing for applications and libraries.</p>
 </div>
 </section>
 <section id="fixtures">
-<h2>Fixtures<a class="headerlink" href="#fixtures" title="Link to this heading">¶</a></h2>
+<h2>Fixtures<a class="headerlink" href="#fixtures" title="Link to this heading"></a></h2>
 <p>Fixtures are used to manage setup and teardown logic for tests.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
 
@@ -119,7 +185,7 @@ complex functional testing for applications and libraries.</p>
 </div>
 </section>
 <section id="markers">
-<h2>Markers<a class="headerlink" href="#markers" title="Link to this heading">¶</a></h2>
+<h2>Markers<a class="headerlink" href="#markers" title="Link to this heading"></a></h2>
 <p>pytest allows tests to be grouped or filtered using markers.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
 
@@ -142,7 +208,7 @@ complex functional testing for applications and libraries.</p>
 </div>
 </section>
 <section id="common-cli-options">
-<h2>Common CLI Options<a class="headerlink" href="#common-cli-options" title="Link to this heading">¶</a></h2>
+<h2>Common CLI Options<a class="headerlink" href="#common-cli-options" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">-v</span></code>: Increase verbosity</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-q</span></code>: Decrease verbosity</p></li>
@@ -157,7 +223,7 @@ complex functional testing for applications and libraries.</p>
 </div>
 </section>
 <section id="naming-conventions">
-<h2>Naming Conventions<a class="headerlink" href="#naming-conventions" title="Link to this heading">¶</a></h2>
+<h2>Naming Conventions<a class="headerlink" href="#naming-conventions" title="Link to this heading"></a></h2>
 <p>pytest will automatically discover tests that follow these patterns:</p>
 <ul class="simple">
 <li><p>Files named <code class="docutils literal notranslate"><span class="pre">test_*.py</span></code> or <code class="docutils literal notranslate"><span class="pre">*_test.py</span></code></p></li>
@@ -166,7 +232,7 @@ complex functional testing for applications and libraries.</p>
 </ul>
 </section>
 <section id="running-tests">
-<h2>Running Tests<a class="headerlink" href="#running-tests" title="Link to this heading">¶</a></h2>
+<h2>Running Tests<a class="headerlink" href="#running-tests" title="Link to this heading"></a></h2>
 <p>To run all tests, simply use:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>uv<span class="w"> </span>run<span class="w"> </span>pytest
 </pre></div>
@@ -174,7 +240,7 @@ complex functional testing for applications and libraries.</p>
 <p>pytest will automatically discover and run tests matching the naming conventions listed above.</p>
 </section>
 <section id="integration-with-pre-commit">
-<h2>Integration with pre-commit<a class="headerlink" href="#integration-with-pre-commit" title="Link to this heading">¶</a></h2>
+<h2>Integration with pre-commit<a class="headerlink" href="#integration-with-pre-commit" title="Link to this heading"></a></h2>
 <p>To run tests automatically before every commit, add the following to your <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">local</span>
 <span class="w">  </span><span class="nt">hooks</span><span class="p">:</span>
@@ -197,78 +263,47 @@ complex functional testing for applications and libraries.</p>
 <p>This ensures dependencies are installed and tests are executed before every commit, helping catch issues early.</p>
 </section>
 <section id="uninstallation">
-<h2>Uninstallation<a class="headerlink" href="#uninstallation" title="Link to this heading">¶</a></h2>
+<h2>Uninstallation<a class="headerlink" href="#uninstallation" title="Link to this heading"></a></h2>
 <p>To remove pytest:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>uv<span class="w"> </span>remove<span class="w"> </span>--dev<span class="w"> </span>pytest
 </pre></div>
 </div>
 </section>
 <section id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">¶</a></h2>
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading"></a></h2>
 <p>pytest is a powerful, flexible, and widely adopted testing tool that helps you maintain code quality and catch bugs early through simple yet expressive tests.</p>
 </section>
 </section>
 
 
+           </div>
           </div>
-          
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pytest-cov.html" class="btn btn-neutral float-left" title="Testing: pytest-cov" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tox.html" class="btn btn-neutral float-right" title="Testing: tox" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, fusemachines.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="Main">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">pyfoundry</a></h1>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
 
-
-
-
-
-
-
-
-
-<search id="searchbox" style="display: none" role="search">
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</search>
-<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-  </ul></li>
-</ul>
-</div>
-
-
-
-
-
-
-
-
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &#169;2025, fusemachines.
-      
-      |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
-      
-      |
-      <a href="../_sources/setup/pytest.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
-
-    
-
-    
-  </body>
+</body>
 </html>
