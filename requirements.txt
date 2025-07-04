@@ -1,0 +1,22 @@
+# Auto-generated from pyproject.toml
+# Main dependencies
+
+dynaconf>=3.2.11
+fire>=0.7.0
+
+# Documentation dependencies
+sphinx
+sphinx_rtd_theme
+
+# Development dependencies
+dev = [
+  coverage>=7.9.1,
+  mypy>=1.16.1,
+  pre-commit>=4.2.0,
+  pytest>=8.4.0,
+  pytest-cov>=6.2.1,
+  ruff>=0.11.13,
+  sphinx>=8.2.3,
+  sphinx-rtd-theme>=3.0.2,
+  tox>=4.27.0
+]
