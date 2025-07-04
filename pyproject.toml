@@ -22,6 +22,8 @@ dev = [
   "pytest>=8.4.0",
   "pytest-cov>=6.2.1",
   "ruff>=0.11.13",
+  "sphinx>=8.2.3",
+  "sphinx-rtd-theme>=3.0.2",
   "tox>=4.27.0",
 ]
 
