@@ -14,6 +14,10 @@ readme = "README.rst"
 requires-python = ">=3.12"
 dependencies = ["dynaconf>=3.2.11", "fire>=0.7.0"]
 
+[project.optional-dependencies.docs]
+sphinx = "*"
+sphinx_rtd_theme = "*"
+
 [dependency-groups]
 dev = [
   "coverage>=7.9.1",
