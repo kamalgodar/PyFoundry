@@ -20,7 +20,7 @@ Key Features
 - Cross-platform support (Windows/macOS/Linux)
 
 Configuration Discovery
-----------------------
+-------------------------
 
 When opening a file, EditorConfig:
 
