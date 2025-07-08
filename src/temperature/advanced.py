@@ -4,6 +4,8 @@ import warnings
 
 import src
 from src.decorators import log_execution, logger
+
+
 class TemperatureConverter:
     """A class for converting between temperature units with validation."""
 
@@ -23,9 +25,7 @@ class TemperatureConverter:
         Raises:
             ValueError: If invalid units or conversion paths are provided.
         """
-        valid_units = {
-            "C", "F", "K"
-            }
+        valid_units = {"C", "F", "K"}
 
         if from_unit not in valid_units or to_unit not in valid_units:
             logger.error(f"Invalid units: from='{from_unit}', to='{to_unit}'")
