@@ -18,6 +18,4 @@ documentation for details.
    README
    initialization/initialization
    setup/setup
-   modules
-   src.decorators
-   src.temperature
+   src/src
