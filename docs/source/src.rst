@@ -7,8 +7,8 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   src/decorators
-   src/temperature
+   src.decorators
+   src.temperature
 
 Module contents
 ---------------
