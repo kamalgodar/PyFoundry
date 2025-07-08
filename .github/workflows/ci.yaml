@@ -1,4 +1,4 @@
-name: CI
+name: Unit Tests CI
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   job-1:
-    name: First Test CI
+    name: Unit Test CI
     runs-on: ubuntu-latest
 
     steps:

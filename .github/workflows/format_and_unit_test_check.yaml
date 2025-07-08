@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - test
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  unit-test:
+    name: Unit Test CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install uv
+          uv sync
+
+      - name: Run tests
+        run: |
+          uv run pytest
+
+  format-check:
+    name: Format Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install ruff
+
+      - name: Run Ruff
+        run:
