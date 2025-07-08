@@ -378,6 +378,12 @@ dependencies = [
     { name = "fire" },
 ]
 
+[package.optional-dependencies]
+docs = [
+    { name = "sphinx" },
+    { name = "sphinx-rtd-theme" },
+]
+
 [package.dev-dependencies]
 dev = [
     { name = "coverage" },
@@ -395,7 +401,10 @@ dev = [
 requires-dist = [
     { name = "dynaconf", specifier = ">=3.2.11" },
     { name = "fire", specifier = ">=0.7.0" },
+    { name = "sphinx", marker = "extra == 'docs'" },
+    { name = "sphinx-rtd-theme", marker = "extra == 'docs'" },
 ]
+provides-extras = ["docs"]
 
 [package.metadata.requires-dev]
 dev = [
