@@ -18,4 +18,4 @@ documentation for details.
    README
    initialization/initialization
    setup/setup
-   src/src
+   src
