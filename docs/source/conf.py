@@ -6,6 +6,10 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+import os
+import sys
+sys.path.insert(0, os.path.abspath('../../src'))
+
 project = 'pyfoundry'
 copyright = '2025, fusemachines'
 author = 'fusemachines'
@@ -23,9 +27,6 @@ extensions = [
 templates_path = ['_templates']
 exclude_patterns = []
 
-import os
-import sys
-sys.path.insert(0, os.path.abspath('../src'))
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
