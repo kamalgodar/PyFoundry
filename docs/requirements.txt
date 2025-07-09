@@ -1,2 +1,3 @@
 sphinx
 sphinx_rtd_theme
+toml>=0.10.2
