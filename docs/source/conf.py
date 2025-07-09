@@ -10,12 +10,12 @@ import os
 import sys
 import toml
 
-sys.path.insert(0, os.path.abspath("../"))
+sys.path.insert(0, os.path.abspath("../../src"))
 
 def _get_project_meta():
     try:
         pyproject_path = os.path.abspath(
-            os.path.join(os.path.dirname(__file__), "..", "pyproject.toml")
+            os.path.join(os.path.dirname(__file__), "../..", "pyproject.toml")
         )
         return toml.load(pyproject_path)["project"]
     except FileNotFoundError:
